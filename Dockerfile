@@ -15,3 +15,5 @@ COPY account.conf /root/.acme.sh/account.conf
 # cert will be stored in: root/.acme.sh/example.com/
 ARG DOMAIN_NAME
 RUN /root/.acme.sh/acme.sh --issue --dns dns_netcup --dnssleep 900 -d $DOMAIN_NAME -d *.$DOMAIN_NAME
+RUN cd /root/.acme.sh/$DOMAIN_NAME/ && \
+cat $DOMAIN_NAME.key $DOMAIN_NAME.cer >> ../cert.pem
